@@ -28,7 +28,7 @@ public class MealEntryMapper {
         return MealEntry.builder()
                 .user(user)
                 .meal(meal)
-                .dateTime(mealEntryDto.getDateTime())
+                .timestamp(mealEntryDto.getTimestamp())
                 .quantity(mealEntryDto.getQuantity())
                 .build();
     }
@@ -37,7 +37,7 @@ public class MealEntryMapper {
         return MealEntryDto.builder()
                 .userId(mealEntry.getUser().getId())
                 .mealId(mealEntry.getMeal().getId())
-                .dateTime(mealEntry.getDateTime())
+                .timestamp(mealEntry.getTimestamp())
                 .quantity(mealEntry.getQuantity())
                 .build();
     }

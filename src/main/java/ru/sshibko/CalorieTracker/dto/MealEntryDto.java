@@ -13,6 +13,6 @@ public class MealEntryDto {
 
     private Long userId;
     private Long mealId;
-    private LocalDateTime dateTime;
+    private LocalDateTime timestamp;
     private int quantity;
 }

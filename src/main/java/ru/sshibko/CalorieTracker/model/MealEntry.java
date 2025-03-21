@@ -27,7 +27,7 @@ public class MealEntry {
     private Meal meal;
 
     @Column(name = "date_time")
-    private LocalDateTime dateTime;
+    private LocalDateTime timestamp;
 
     @Column(name = "quantity")
     private int quantity;
