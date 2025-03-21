@@ -16,6 +16,7 @@ public class UserDto {
     private double weight;
     private double height;
     private String goal;
+    private double dailyCalories;
 
     @Override
     public String toString() {
@@ -27,6 +28,7 @@ public class UserDto {
                 ", weight=" + weight +
                 ", height=" + height +
                 ", goal='" + goal + '\'' +
+                ", dailyCalories=" + dailyCalories +
                 '}';
     }
 }

@@ -20,6 +20,7 @@ public class UserMapper {
                 .weight(userDto.getWeight())
                 .height(userDto.getHeight())
                 .goal(Goal.valueOf(userDto.getGoal()))
+                .dailyCalories(userDto.getDailyCalories())
                 .build();
     }
 
@@ -35,6 +36,7 @@ public class UserMapper {
                 .weight(user.getWeight())
                 .height(user.getHeight())
                 .goal(String.valueOf(user.getGoal()))
+                .dailyCalories(user.getDailyCalories())
                 .build();
     }
 }

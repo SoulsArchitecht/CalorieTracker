@@ -41,6 +41,6 @@ public class User {
     @Column(name = "goal")
     private Goal goal;
 
-    @Column(name = "daily_calorie")
-    private double dailyCalorie;
+    @Column(name = "daily_calories")
+    private double dailyCalories;
 }

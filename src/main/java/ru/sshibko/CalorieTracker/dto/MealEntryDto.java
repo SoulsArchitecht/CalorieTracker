@@ -15,4 +15,14 @@ public class MealEntryDto {
     private Long mealId;
     private LocalDateTime timestamp;
     private int quantity;
+
+    @Override
+    public String toString() {
+        return "MealEntryDto{" +
+                "userId=" + userId +
+                ", mealId=" + mealId +
+                ", timestamp=" + timestamp +
+                ", quantity=" + quantity +
+                '}';
+    }
 }

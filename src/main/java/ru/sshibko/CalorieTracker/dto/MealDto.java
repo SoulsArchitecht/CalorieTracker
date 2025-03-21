@@ -14,4 +14,15 @@ public class MealDto {
     private double proteins;
     private double fats;
     private double carbohydrates;
+
+    @Override
+    public String toString() {
+        return "MealDto{" +
+                "name='" + name + '\'' +
+                ", caloriesPerServing=" + caloriesPerServing +
+                ", proteins=" + proteins +
+                ", fats=" + fats +
+                ", carbohydrates=" + carbohydrates +
+                '}';
+    }
 }

@@ -1,0 +1,19 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: CalorieTracker
+  datasource:
+    url: "jdbc:postgresql://localhost:5433/calorie_tracker"
+    username: "postgres"
+    password: "0000"
+    driverClassname: org.postgresql.Driver
+  liquibase:
+    enabled: false
+    change-log: db/changelog/db.changelog-master.yml
+
+
+
+
+
