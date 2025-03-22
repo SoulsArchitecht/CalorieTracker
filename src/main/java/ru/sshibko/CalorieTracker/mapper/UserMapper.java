@@ -12,20 +12,31 @@ import ru.sshibko.CalorieTracker.model.enums.Goal;
 public class UserMapper {
 
     public User mapToEntity(UserDto userDto) {
+        Gender gender = null;
+        if (userDto.getGender() != null) {
+            gender = Gender.valueOf(userDto.getGender());
+        } else {
+            gender = Gender.MALE;
+        }
+
+        Goal goal = null;
+        if (userDto.getGoal() != null) {
+            goal = Goal.valueOf(userDto.getGoal());
+        } else {
+            goal = Goal.WEIGHT_MAINTENANCE;
+        }
+
         return User.builder()
                 .username(userDto.getUsername())
                 .email(userDto.getEmail())
                 .age(userDto.getAge())
-                .gender(Gender.valueOf(userDto.getGender()))
+                .gender(gender)
                 .weight(userDto.getWeight())
                 .height(userDto.getHeight())
-                .goal(Goal.valueOf(userDto.getGoal()))
+                .goal(goal)
                 .dailyCalories(userDto.getDailyCalories())
                 .build();
     }
-
-
-    //TODO if it'll need null init status for enums
 
     public UserDto mapToDto(User user) {
         return UserDto.builder()

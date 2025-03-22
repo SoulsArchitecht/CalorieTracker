@@ -2,6 +2,7 @@ package ru.sshibko.CalorieTracker.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -19,16 +20,17 @@ public class MealEntry {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "meal_id")
+    @JoinColumn(name = "meal_id", nullable = false)
     private Meal meal;
 
-    @Column(name = "date_time")
+    @CreationTimestamp
+    @Column(name = "date_time", nullable = false)
     private LocalDateTime timestamp;
 
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     private int quantity;
 }
