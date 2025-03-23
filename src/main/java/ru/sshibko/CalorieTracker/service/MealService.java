@@ -71,6 +71,6 @@ public class MealService implements CRUDService<MealDto> {
         Meal meal = mealRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Meal not found with id: " + id));
         mealRepository.delete(meal);
-        log.info("User with id: {} deleted successfully", id);
+        log.info("Meal with id: {} deleted successfully", id);
     }
 }

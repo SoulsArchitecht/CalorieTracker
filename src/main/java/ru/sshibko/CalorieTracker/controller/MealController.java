@@ -42,5 +42,4 @@ public class MealController {
     public void deleteMeal(@PathVariable("id") Long id) {
         mealService.delete(id);
     }
-
 }
