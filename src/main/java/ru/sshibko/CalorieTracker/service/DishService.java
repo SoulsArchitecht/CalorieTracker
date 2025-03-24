@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import ru.sshibko.CalorieTracker.dto.DishDto;
 import ru.sshibko.CalorieTracker.exception.ResourceNotFoundException;
 import ru.sshibko.CalorieTracker.mapper.DishMapper;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Validated
 public class DishService implements CRUDService<DishDto> {
 
     private final DishRepository dishRepository;
@@ -26,7 +28,7 @@ public class DishService implements CRUDService<DishDto> {
 
     @Override
     public DishDto getById(Long id) {
-        log.info("Getting meal with id: " + id);
+        log.info("Getting dish with id: " + id);
         Dish dish = dishRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Dish not found with id: " + id));
         return dishMapper.mapToDto(dish);

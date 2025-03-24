@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import ru.sshibko.CalorieTracker.dto.MealDto;
 import ru.sshibko.CalorieTracker.exception.ResourceNotFoundException;
 import ru.sshibko.CalorieTracker.mapper.MealMapper;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Validated
 public class MealService implements CRUDService<MealDto> {
 
     private final MealRepository mealRepository;
@@ -33,15 +35,15 @@ public class MealService implements CRUDService<MealDto> {
 
     @Override
     public MealDto getById(Long id) {
-        log.info("Getting mealEntry with id: " + id);
+        log.info("Getting meals with id: " + id);
         Meal meal = mealRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("MealEntry not found with id: " + id));
+                () -> new ResourceNotFoundException("Meals not found with id: " + id));
         return mealMapper.mapToDto(meal);
     }
 
     @Override
     public Collection<MealDto> getAll() {
-        log.info("Getting all mealEntries");
+        log.info("Getting all meals");
         List<Meal> mealsEntries = mealRepository.findAll();
         return mealsEntries.stream().map(mealMapper::mapToDto).collect(Collectors.toList());
     }
@@ -51,7 +53,7 @@ public class MealService implements CRUDService<MealDto> {
     public MealDto create(MealDto mealDto) {
         Meal meal = mealMapper.mapToEntity(mealDto);
         Meal savedMeal = mealRepository.save(meal);
-        log.info("Saving mealEntry with id: {}", savedMeal.getId());
+        log.info("Saving meals with id: {}", savedMeal.getId());
         return mealMapper.mapToDto(savedMeal);
     }
 
@@ -59,7 +61,7 @@ public class MealService implements CRUDService<MealDto> {
     @Transactional
     public MealDto update(Long id, MealDto mealDto) {
         Meal meal = mealRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("MealEntry not found with id: " + id));
+                () -> new ResourceNotFoundException("Meals not found with id: " + id));
         List<Dish> dishes = dishRepository.findAllById(mealDto.getDishIds());
         User user = userRepository.findById(mealDto.getUserId()).orElseThrow(
                 () -> new ResourceNotFoundException("User not found with id: " + id));
@@ -70,7 +72,7 @@ public class MealService implements CRUDService<MealDto> {
         meal.setQuantity(mealDto.getQuantity());
 
         Meal updatedMeal = mealRepository.save(meal);
-        log.info("Updating mealEntry with id: {}", updatedMeal.getId());
+        log.info("Updating meals with id: {}", updatedMeal.getId());
         return mealMapper.mapToDto(updatedMeal);
     }
 
@@ -78,8 +80,8 @@ public class MealService implements CRUDService<MealDto> {
     @Transactional
     public void delete(Long id) {
         Meal meal = mealRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException("MealEntry not found with id: " + id));
+                () -> new ResourceNotFoundException("Meals not found with id: " + id));
         mealRepository.delete(meal);
-        log.info("MealEntry with id: {} deleted successfully", id);
+        log.info("Meals with id: {} deleted successfully", id);
     }
 }

@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import ru.sshibko.CalorieTracker.dto.UserDto;
 import ru.sshibko.CalorieTracker.exception.ResourceNotFoundException;
 import ru.sshibko.CalorieTracker.mapper.UserMapper;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Validated
 public class UserService implements CRUDService<UserDto> {
 
     private final UserRepository userRepository;
