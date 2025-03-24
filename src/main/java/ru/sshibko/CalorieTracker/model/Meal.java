@@ -2,6 +2,10 @@ package ru.sshibko.CalorieTracker.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -16,18 +20,26 @@ public class Meal {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @Column(name = "calories_per_serving")
-    private double caloriesPerServing;
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "meal_dish",
+            joinColumns = @JoinColumn(name = "meal_id"),
+            inverseJoinColumns = @JoinColumn(name = "dish_id")
+    )
+    private List<Dish> dishes;
 
-    @Column(name = "proteins")
-    private double proteins;
+    @CreationTimestamp
+    @Column(name = "timestamp", nullable = false)
+    private LocalDateTime timestamp;
 
-    @Column(name = "fats")
-    private double fats;
+    @Column(name = "quantity", nullable = false)
+    private int quantity;
 
-    @Column(name = "carbohydrates")
-    private double carbohydrates;
+    public int getTotalCalories() {
+        return dishes.stream().mapToInt(Dish::getCaloriesPerServing).sum();
+    }
 }

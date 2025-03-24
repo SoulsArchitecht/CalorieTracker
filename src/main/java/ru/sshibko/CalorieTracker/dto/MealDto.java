@@ -2,6 +2,9 @@ package ru.sshibko.CalorieTracker.dto;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -9,20 +12,17 @@ import lombok.*;
 @Builder
 public class MealDto {
 
-    private String name;
-    private double caloriesPerServing;
-    private double proteins;
-    private double fats;
-    private double carbohydrates;
+    private Long userId;
+    private List<Long> dishIds;
+    private LocalDateTime timestamp;
+    private int quantity;
 
     @Override
     public String toString() {
-        return "MealDto{" +
-                "name='" + name + '\'' +
-                ", caloriesPerServing=" + caloriesPerServing +
-                ", proteins=" + proteins +
-                ", fats=" + fats +
-                ", carbohydrates=" + carbohydrates +
+        return "MealEntryDto{" +
+                "userId=" + userId +
+                ", timestamp=" + timestamp +
+                ", quantity=" + quantity +
                 '}';
     }
 }

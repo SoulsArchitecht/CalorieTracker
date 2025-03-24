@@ -1,20 +1,26 @@
 package ru.sshibko.CalorieTracker.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ReportDto {
 
-    private final double totalCaloriesForDay;
+    private Long userId;
+    private LocalDateTime timestamp;
+    private int totalCaloriesForDay;
 
     @Override
     public String toString() {
         return "ReportDto{" +
-                "totalCaloriesForDay=" + totalCaloriesForDay +
+                "userId=" + userId +
+                ", timestamp=" + timestamp +
+                ", totalCaloriesForDay=" + totalCaloriesForDay +
                 '}';
     }
 }

@@ -1,20 +1,25 @@
 package ru.sshibko.CalorieTracker.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class InDailyLimitDto {
 
+    private Long userId;
+    private LocalDateTime timestamp;
     private boolean inDailyLimit;
 
     @Override
     public String toString() {
         return "InDailyLimitDto{" +
-                "inDailyLimit=" + inDailyLimit +
+                "userId=" + userId +
+                ", timestamp=" + timestamp +
+                ", inDailyLimit=" + inDailyLimit +
                 '}';
     }
 }

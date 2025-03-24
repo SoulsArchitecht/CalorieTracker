@@ -1,10 +1,8 @@
 package ru.sshibko.CalorieTracker.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.sshibko.CalorieTracker.dto.DailyHistoryDto;
 import ru.sshibko.CalorieTracker.dto.InDailyLimitDto;
 import ru.sshibko.CalorieTracker.dto.ReportDto;
 import ru.sshibko.CalorieTracker.service.ReportService;
@@ -18,13 +16,18 @@ public class ReportController {
 
     private final ReportService reportService;
 
-    @GetMapping("/daily")
-    public ReportDto getDailyCalories(@RequestParam Long userId, @RequestParam String date) {
+    @GetMapping("/{userId}/daily")
+    public ReportDto getDailyCalories(@PathVariable Long userId, @RequestParam String date) {
         return reportService.getTotalCaloriesForDay(userId, LocalDateTime.parse(date));
     }
 
-    @GetMapping("/check-limit")
-    public InDailyLimitDto checkDailyLimit(@RequestParam Long userId, @RequestParam String date) {
+    @GetMapping("/{userId}/check-limit")
+    public InDailyLimitDto checkDailyLimit(@PathVariable Long userId, @RequestParam String date) {
         return reportService.isWithinDailyLimit(userId, LocalDateTime.parse(date));
+    }
+
+    @GetMapping("/{userId}/history")
+    public DailyHistoryDto getHistory(@PathVariable Long userId) {
+        return reportService.getDailyHistory(userId);
     }
 }
