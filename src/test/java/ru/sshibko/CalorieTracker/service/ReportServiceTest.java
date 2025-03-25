@@ -192,7 +192,10 @@ class ReportServiceTest {
         Dish dish3 = createDish(3L, "dessert", 700);
 
         Meal meal1 = createMeal(1L, user, List.of(dish1), today, 2);
-        Meal meal2 = createMeal(2L, user, List.of(dish2), today.plusHours(3), 1);
+        /**
+         * Be carefully if time after 23.00 and before 24.00 the test will crush!!!
+         */
+        Meal meal2 = createMeal(2L, user, List.of(dish2), today.plusMinutes(1), 1);
         Meal meal3 = createMeal(3L, user, List.of(dish3), yesterday, 1);
 
         when(mealRepository.findAllByUserIdGroupingDate(user.getId()))
@@ -228,7 +231,10 @@ class ReportServiceTest {
         Dish dish2 = createDish(2L, "porridge", 500);
 
         Meal meal1 = createMeal(1L, user, List.of(dish1, dish2), date, 2);
-        Meal meal2 = createMeal(2L, user, List.of(dish2), date.plusHours(3), 3);
+        /**
+         * Be carefully if time after 23.00 and before 24.00 the test will crush!!!
+         */
+        Meal meal2 = createMeal(2L, user, List.of(dish2), date.plusMinutes(1), 3);
 
         when(mealRepository.findAllByUserIdGroupingDate(user.getId()))
                 .thenReturn(List.of(meal1, meal2));

@@ -19,13 +19,13 @@ public class ReportController {
 
     private final ReportService reportService;
 
-    @Operation(summary = "Показать дневной отчет по питанию")
+    @Operation(summary = "Показать дневное потребление калорий по указанной дате")
     @GetMapping("/{userId}/daily")
     public ReportDto getDailyCalories(@PathVariable Long userId, @RequestParam String date) {
         return reportService.getTotalCaloriesForDay(userId, LocalDateTime.parse(date));
     }
 
-    @Operation(summary = "Показать уложился ли пользователь в дневную норму")
+    @Operation(summary = "Показать уложился ли пользователь в дневную норму в указанную дату")
     @GetMapping("/{userId}/check-limit")
     public InDailyLimitDto checkDailyLimit(@PathVariable Long userId, @RequestParam String date) {
         return reportService.isWithinDailyLimit(userId, LocalDateTime.parse(date));
