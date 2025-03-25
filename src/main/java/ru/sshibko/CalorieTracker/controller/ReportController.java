@@ -28,6 +28,6 @@ public class ReportController {
 
     @GetMapping("/{userId}/history")
     public DailyHistoryDto getHistory(@PathVariable Long userId) {
-        return reportService.getDailyHistory(userId);
+        return reportService.getDailyHistoryForDay(userId);
     }
 }

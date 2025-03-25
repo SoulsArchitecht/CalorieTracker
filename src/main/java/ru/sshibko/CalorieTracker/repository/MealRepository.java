@@ -16,10 +16,15 @@ public interface MealRepository extends JpaRepository<Meal, Long> {
             "SELECT * FROM meals m WHERE m.user_id = :userId AND DATE(m.timestamp) = DATE(:date)";
     String queryByUserId =
             "SELECT * FROM meals m WHERE m.user_id = :userId";
+    String queryGroupingByUserIdAndDate =
+            "SELECT * FROM meals m WHERE m.user_id = :userId ORDER BY DATE(m.timestamp) DESC, m.timestamp DESC";
 
     @Query(value = queryByUserAndDate, nativeQuery = true)
     List<Meal> findByUserIdAndDate(@Param("userId") Long userId, @Param("date") LocalDateTime date);
 
     @Query(value = queryByUserId, nativeQuery = true)
     List<Meal> findAllByUserId(@Param("userId") Long userId);
+
+    @Query(value = queryGroupingByUserIdAndDate, nativeQuery = true)
+    List<Meal> findAllByUserIdGroupingDate(@Param("userId") Long userId);
 }

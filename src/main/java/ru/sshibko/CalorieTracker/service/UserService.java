@@ -81,7 +81,7 @@ public class UserService implements CRUDService<UserDto> {
         log.info("User with id: {} deleted successfully", id);
     }
 
-    private double calculateDailyCalories(User user) {
+    public double calculateDailyCalories(User user) {
         double bmr = 0;
         if (user.getGender() == Gender.MALE) {
             bmr = 10 * user.getWeight() + 6.25 * user.getHeight() - 5 * user.getAge() + 5;

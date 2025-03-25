@@ -16,7 +16,6 @@ public class MealDto {
 
     private Long userId;
 
-    @NotBlank
     private List<Long> dishIds;
 
     private LocalDateTime timestamp;
